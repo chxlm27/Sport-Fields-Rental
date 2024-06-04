@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Edit Sport Field</h2>
+  <form [formGroup]="fieldForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="id">ID</label>
+      <input type="text" id="id" formControlName="id" [attr.disabled]="true" readonly>
+    </div>
+    <div class="form-group">
+      <label for="sportType">Sport Type</label>
+      <input type="text" id="sportType" formControlName="sportType" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="terrainName">Terrain Name</label>
+      <input type="text" id="terrainName" formControlName="terrainName" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="dimension">Dimension</label>
+      <input type="text" id="dimension" formControlName="dimension" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="terrainType">Terrain Type</label>
+      <input type="text" id="terrainType" formControlName="terrainType" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" formControlName="price" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="file">Image</label>
+      <input type="file" id="file" (change)="onFileSelected($event)" class="form-control">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <button class="btn btn-secondary ml-2" (click)="goBackToList()">Back to List</button>
+  </form>
+</div>

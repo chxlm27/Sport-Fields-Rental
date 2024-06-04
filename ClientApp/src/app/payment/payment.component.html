@@ -1,0 +1,49 @@
+<div *ngIf="showSuccessBanner" class="alert alert-success fade show success-banner">
+  <strong>Payment Succeeded!</strong> Thank you for your purchase.
+</div>
+
+<div class="container">
+  <div class="paypal-form">
+    <div class="header">
+      <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" alt="PayPal Logo">
+      <h2>Secure Checkout</h2>
+    </div>
+
+    <form [formGroup]="paymentForm" (ngSubmit)="rentField()">
+      <div class="form-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" class="form-control" placeholder="Enter your card number" formControlName="cardNumber">
+        <div *ngIf="cardNumberMessage" class="text-danger">
+          {{ cardNumberMessage }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="expiryDate">Expiration Date</label>
+        <input type="text" id="expiryDate" class="form-control" placeholder="MM / YY" formControlName="expiryDate">
+        <div *ngIf="expiryDateMessage" class="text-danger">
+          {{ expiryDateMessage }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" class="form-control" placeholder="CVV" formControlName="cvv">
+        <div *ngIf="cvvMessage" class="text-danger">
+          {{ cvvMessage }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Total Amount</label>
+        <p>{{ calculateTotalPrice() }} lei</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">Continue</button>
+    </form>
+
+    <div class="footer">
+      <p>By clicking Continue, you agree to the PayPal <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+/* my-rentals.component.css */
+
+/* Style for each table row */
+.table-row:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Light gray background color on hover */
+}
+
+/* Style for each table cell */
+.table-cell {
+  padding: 10px; /* Add some padding to each cell */
+  text-align: center; /* Center align text */
+}
+
+.alert-info {
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+  color: #0c5460;
+}

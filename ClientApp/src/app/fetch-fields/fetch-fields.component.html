@@ -1,0 +1,105 @@
+<!-- Sport Fields Header -->
+<h1 id="tableLabel">Explore Sport Terrains</h1>
+<p>Discover and book your ideal sport venue from a wide selection of sport fields and courts.</p>
+
+<!-- Success banner at the top of the page -->
+<div *ngIf="successMessage" class="alert alert-success fade show" role="alert">
+  <strong>Success:</strong> {{ successMessage }}
+</div>
+
+<!-- Search Bar -->
+<app-searchbar *ngIf="showSearchBar" (searchEvent)="onSearch($event)"></app-searchbar>
+
+<!-- Filter dropdown using mat-select -->
+<mat-form-field class="mt-2" *ngIf="showFilters">
+  <mat-label>Sort By</mat-label>
+  <mat-select [(value)]="selectedSortOption" (selectionChange)="sortFields()">
+    <mat-option *ngFor="let sortOption of sortByOptions" [value]="sortOption.value">
+      {{ sortOption.label }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Loading message -->
+<p *ngIf="!fields?.length"><em>Loading...</em></p>
+
+<!-- Add Field button -->
+<a class="btn btn-primary mb-3" [routerLink]="['/add-field']" *ngIf="(isAdmin$ | async)">
+  Add Field
+</a>
+
+<!-- Back to List button -->
+<button class="btn btn-secondary mb-3" *ngIf="sportType" [routerLink]="['/fetch-fields']">Back to List</button>
+
+<!-- Sport Fields cards -->
+<div class="row">
+  <ng-container *ngFor="let field of fields">
+    <div class="col-md-4 mb-4">
+      <div class="card mb-3">
+        <div class="card-header">
+          <h5 class="card-title">{{ field.sportType }}</h5>
+        </div>
+        <img [src]="field.urlPath" class="card-img-top" alt="{{ field.sportType }}">
+        <div class="card-body">
+          <ng-container *ngIf="!sportType; else specificSportCardContent">
+            <p class="card-text"></p>
+            <div class="action-cell">
+              <button class="btn btn-primary" (click)="redirectToSport(field.sportType.toLowerCase())">View</button>
+            </div>
+          </ng-container>
+
+          <ng-template #specificSportCardContent>
+            <p class="card-text">
+              <!--<strong>Id:</strong> {{ field.id }}<br>-->
+              <strong>Terrain Name:</strong> {{ field.terrainName }}<br>
+              <strong>Dimension:</strong> {{ field.dimension }}<br>
+              <strong>Terrain Type:</strong> {{ field.terrainType }}<br>
+              <strong>Price:</strong> {{ field.price }}
+            </p>
+            <div class="action-cell">
+              <button class="btn btn-success ml-2" *ngIf="isUserAuthenticated() && !(isAdmin$ | async)" (click)="toggleCalendar(field)">Rent</button>
+              <a class="btn btn-danger" (click)="deleteField(field.id)" *ngIf="(isAdmin$ | async)">Delete</a>
+              <a class="btn btn-info ml-2" [routerLink]="['/edit-field', field.id]" *ngIf="(isAdmin$ | async)">Edit</a>
+            </div>
+          </ng-template>
+
+          <!-- Rent Calendar -->
+          <div class="calendar-container" *ngIf="selectedField === field">
+            <div *ngIf="showCalendar" class="calendar-content">
+              <!-- Error message -->
+              <div *ngIf="errorMessage" class="alert alert-danger fade show" role="alert">
+                <strong>Error:</strong> {{ errorMessage }}
+              </div>
+
+              <!-- Date pickers -->
+              <div class="date-picker-container">
+                <mat-form-field class="start-date-picker">
+                  <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [(ngModel)]="startDate"
+                         (dateInput)="addEvent('start', $event)" [min]="minDate" [matDatepickerFilter]="dateFilter">
+                  <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #startDatePicker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="end-date-picker">
+                  <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [(ngModel)]="endDate"
+                         (dateInput)="addEvent('end', $event)" [min]="startDate || minDate" [matDatepickerFilter]="dateFilter">
+                  <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #endDatePicker></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <!-- Confirm Rent button -->
+              <div class="confirm-rent-container">
+                <button class="btn btn-success ml-2 confirm-rent-button"
+                        *ngIf="selectedField && startDate && endDate"
+                        (click)="rentFieldRedirect(selectedField, startDate, endDate)">
+                  Confirm Rent
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

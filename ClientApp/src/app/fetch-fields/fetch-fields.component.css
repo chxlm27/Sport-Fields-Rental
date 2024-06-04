@@ -1,0 +1,92 @@
+/* Green Banner */
+.alert-success {
+  color: #155724; /* Dark green text color */
+  background-color: #d4edda; /* Light green background color */
+  border-color: #c3e6cb; /* Green border color */
+}
+
+/* Attention Alert */
+.alert-warning {
+  color: #856404; /* Dark yellow text color */
+  background-color: #fff3cd; /* Light yellow background color */
+  border-color: #ffeeba; /* Yellow border color */
+}
+
+/* Error Message Alert */
+.alert-danger {
+  color: #721c24; /* Dark red text color */
+  background-color: #f8d7da; /* Light red background color */
+  border-color: #f5c6cb; /* Red border color */
+}
+
+/* Adjust table spacing and width */
+.table-container {
+  max-width: 2000px; /* Adjust the width as needed */
+  margin: 0; /* Center the table horizontally */
+  overflow-x: auto; /* Add horizontal scrollbar if needed */
+}
+
+/* Style the "View" button */
+.btn {
+  margin: auto; /* Remove default button margin */
+}
+
+/* Add custom styles to the calendars and buttons */
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.date-picker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center horizontally */
+}
+
+.start-date-picker,
+.end-date-picker {
+  width: 150px; /* Adjust the width */
+  margin-right: 10px; /* Add space between datepickers */
+  text-align: center; /* Center the datepicker inputs */
+}
+
+.confirm-rent-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  margin-top: 10px; /* Add space between datepickers and Confirm Rent button */
+}
+
+.confirm-rent-button {
+  width: 150px; /* Adjust the width */
+}
+
+/* Remove close button from alerts */
+.close {
+  display: none !important;
+}
+
+/* Add spacing between cards */
+.field-card {
+  margin-bottom: 20px; /* Adjust spacing as needed */
+}
+
+/* Ensure consistent size for card content */
+.card {
+  max-width: 400px; /* Adjust the maximum width as needed */
+  height: 100%; /* Make all cards the same height */
+}
+
+/* Ensure consistent size for card images */
+.card-img-top {
+  height: 200px; /* Adjust image height as needed */
+  object-fit: cover; /* Ensure image covers the container */
+}
+
+@media (max-width: 768px) {
+  /* Adjust card size for smaller screens */
+  .card {
+    max-width: calc(100% - 20px); /* Adjust maximum width for smaller screens */
+  }
+}

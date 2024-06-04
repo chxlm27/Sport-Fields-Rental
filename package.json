@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@angular/animations": "^16.2.10",
+    "@angular/cdk": "^16.2.9",
+    "@auth0/angular-jwt": "^5.2.0",
+    "angular-calendar": "^0.31.0",
+    "rxjs": "^7.8.1",
+    "swagger-ui": "^5.11.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.2",
+    "typescript": "^5.4.5"
+  }
+}

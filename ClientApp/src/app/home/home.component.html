@@ -1,0 +1,36 @@
+<!-- home.component.html -->
+<!-- Display success banner here -->
+<div *ngIf="successBanner" class="alert alert-success mt-4" role="alert">
+  {{ successBanner }}
+</div>
+
+<div class="container mt-4">
+  <!-- Hero Banner Image -->
+  <div class="hero-image">
+    <img src="assets/teren.jpeg" alt="Hero Banner" class="img-fluid">
+    <div class="hero-text">
+      <h1>Welcome to Sport Field Rentals</h1>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="mt-4 text-center">
+    <p class="lead mb-4">Explore our premium sport fields and book your favorite!</p>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <p>Whether you're a sports enthusiast or just looking for a fun time, we have the perfect fields for you.</p>
+        <p>Join us now and enjoy the best sports experience.</p>
+      </div>
+    </div>
+
+    <div *ngIf="(isAdmin$ | async); else userMessage" class="alert alert-success mt-4">
+      <strong>Hello Admin!</strong> You have special privileges.
+    </div>
+    <ng-template #userMessage>
+      <div class="alert alert-info mt-4">
+        Welcome! Explore our sports fields and start your booking.
+      </div>
+    </ng-template>
+  </div>
+</div>

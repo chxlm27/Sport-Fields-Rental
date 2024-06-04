@@ -1,0 +1,36 @@
+/* searchbar.component.css */
+
+:host {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  padding: 12px;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  margin-right: 10px;
+  font-size: 18px;
+  transition: border-color 0.3s ease-in-out;
+  color: #555;
+}
+
+  input:focus {
+    outline: none;
+    border-color: #2ecc71;
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+  }
+
+button {
+  background-color: #2ecc71;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+  button:hover {
+    background-color: #27ae60;
+  }

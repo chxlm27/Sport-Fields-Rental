@@ -1,0 +1,43 @@
+/* rentals.component.css */
+
+/* Style for each table row */
+.table-row:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Light gray background color on hover */
+}
+
+/* Style for each table cell */
+.table-cell {
+  padding: 10px; /* Add some padding to each cell */
+  text-align: center; /* Center align text */
+}
+
+/* rentals.component.css */
+
+/* rentals.component.css */
+
+.search-filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* Reduced gap */
+}
+
+.table-container {
+  margin-top: 10px; /* Reduced margin to bring the table closer to the filter button */
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.table th, .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table th {
+  font-weight: bold;
+}
+
+.thead-dark th {
+  color: white;
+}

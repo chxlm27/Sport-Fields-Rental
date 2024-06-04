@@ -1,0 +1,55 @@
+<!-- my-rentals.component.html -->
+<h1 id="tableLabel">My Rentals</h1>
+<p>This page displays rental information for the logged-in user.</p>
+
+<!-- Success banner at the top of the page -->
+<div *ngIf="successMessage" class="alert alert-info fade show" role="alert">
+  <strong>Notice:</strong> {{ successMessage }}
+</div>
+
+<mat-form-field>
+  <mat-label>Filter By:</mat-label>
+  <mat-select [(value)]="filterOption" (selectionChange)="onFilterChange($event)">
+    <mat-option value="all">All</mat-option>
+    <mat-option value="past">Past Rentals</mat-option>
+    <mat-option value="active">Active Rentals</mat-option>
+    <mat-option value="future">Future Rentals</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div *ngIf="myRentals.length > 0; else loading">
+  <div class="table-container">
+    <table class="table table-bordered table-striped table-hover" aria-labelledby="tableLabel">
+      <thead class="thead-dark">
+        <tr>
+          <!--<th class="bg-primary text-white">Rental Id</th>-->
+          <th class="bg-success text-white">Terrain Name</th>
+          <th class="bg-warning text-white">Price Per Hour</th>
+          <th class="bg-danger text-white">Start Date</th>
+          <th class="bg-info text-white">End Date</th>
+          <th class="bg-primary text-white">Total Days</th>
+          <th class="bg-success text-white">Total Price</th>
+          <th *ngIf="filterOption === 'future'" class="bg-primary text-white">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rental of filteredRentals(); let i = index" class="table-row">
+          <!--  <td class="bg-primary text-white table-cell">{{ rental.id }}</td>-->
+          <td class="bg-success text-white table-cell">{{ rental.terrainName }}</td>
+          <td class="bg-warning text-white table-cell">{{ rental.pricePerHour }}</td>
+          <td class="bg-danger text-white table-cell">{{ rental.startDate | date:'yyyy-MM-dd' }}</td>
+          <td class="bg-info text-white table-cell">{{ rental.endDate | date:'yyyy-MM-dd' }}</td>
+          <td class="bg-primary text-white table-cell">{{ rental.totalDays }}</td>
+          <td class="bg-success text-white table-cell">{{ rental.totalPrice | currency:'RON ' }}</td>
+          <td *ngIf="filterOption === 'future'" class="bg-primary text-white table-cell">
+            <button class="btn btn-danger" (click)="cancelRental(rental.id)">Cancel</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p><em>Loading...</em></p>
+</ng-template>

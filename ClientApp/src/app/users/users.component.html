@@ -1,0 +1,47 @@
+<!-- users.component.html -->
+<h1 id="tableLabel">Users</h1>
+<p>This page displays user information.</p>
+
+
+<app-searchbar (searchEvent)="searchTerm = $event; updateFilteredUsers()"
+               [placeholder]="searchPlaceholder"></app-searchbar>
+
+<div class="table-container" *ngIf="filteredUsers.length">
+  <div class="dropdown-container mt-2">
+    <mat-form-field appearance="fill">
+      <mat-label>Sort By:</mat-label>
+      <mat-select [(value)]="selectedSortOption" (selectionChange)="updateFilteredUsers()">
+        <mat-option value="default">Default</mat-option>
+        <mat-option value="alphabetical">Alphabetical Asc</mat-option>
+        <mat-option value="alphabeticalDesc">Alphabetical Desc</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover" aria-labelledby="tableLabel">
+      <thead class="thead-dark">
+        <tr>
+          <!--<th class="bg-primary text-white">Id</th>-->
+          <th class="bg-success text-white">First Name</th>
+          <th class="bg-warning text-white">Last Name</th>
+          <th class="bg-danger text-white">Age</th>
+          <th class="bg-info text-white">Address</th>
+          <th class="bg-primary text-white">Email</th>
+          <th class="bg-success text-white">Phone No</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUsers" class="table-row">
+          <!--<td class="bg-primary text-white table-cell">{{ user.id }}</td>-->
+          <td class="bg-success text-white table-cell">{{ user.firstName }}</td>
+          <td class="bg-warning text-white table-cell">{{ user.lastName }}</td>
+          <td class="bg-danger text-white table-cell">{{ user.age }}</td>
+          <td class="bg-info text-white table-cell">{{ user.address }}</td>
+          <td class="bg-primary text-white table-cell">{{ user.email }}</td>
+          <td class="bg-success text-white table-cell">{{ user.phoneNo }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

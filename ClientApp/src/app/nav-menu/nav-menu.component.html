@@ -1,0 +1,57 @@
+<!-- nav-menu.component.html -->
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">Sport Field Rentals</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/fetch-fields']">Sport Terrains</a>
+          </li>
+
+          <!-- Conditionally show "All Rentals" or "My Rentals" based on isAdmin -->
+          <li *ngIf="isAdmin && isAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/rentals']">All Rentals</a>
+          </li>
+          <li *ngIf="!isAdmin && isAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/my-rentals']">My Rentals</a>
+          </li>
+
+          <li *ngIf="isAdmin && isAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/users']">Users</a>
+          </li>
+
+          <!-- Display user information -->
+          <li *ngIf="userEmail !== null && isAuthenticated" class="nav-item">
+            <div class="nav-link text-dark">
+              Hi, {{ userEmail }}
+            </div>
+          </li>
+          <li *ngIf="userEmail !== null && isAuthenticated" class="nav-item">
+            <button class="btn btn-link text-dark" (click)="logout()">Logout</button>
+          </li>
+
+          <!-- Login and Register links -->
+          <li *ngIf="userEmail === null && !isAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/login']">Login</a>
+          </li>
+          <li *ngIf="userEmail === null && !isAuthenticated" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/register']">Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

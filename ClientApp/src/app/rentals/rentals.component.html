@@ -1,0 +1,53 @@
+<!-- rentals.component.html -->
+<h1 id="tableLabel">Rentals</h1>
+<p>This page displays rental information.</p>
+
+<!-- Search and Filter Section -->
+<div class="search-filter-container">
+  <app-searchbar (searchEvent)="onSearchChange($event)" [placeholder]="'Search rentals'"></app-searchbar>
+
+  <div class="dropdown-container mt-2">
+    <mat-form-field appearance="fill">
+      <mat-label>Filter By:</mat-label>
+      <mat-select [(value)]="filterOption" (selectionChange)="onFilterChange($event)">
+        <mat-option value="all">All</mat-option>
+        <mat-option value="past">Past Rentals</mat-option>
+        <mat-option value="active">Active Rentals</mat-option>
+        <mat-option value="future">Future Rentals</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+<p *ngIf="rentals.length === 0"><em>Loading rentals or no rentals available...</em></p>
+
+<!-- Rentals Table -->
+<div class="table-container" *ngIf="filteredRentals.length">
+  <table class="table table-bordered table-striped table-hover" aria-labelledby="tableLabel">
+    <thead class="thead-dark">
+      <tr>
+        <th class="bg-success text-white">User Email</th>
+        <th class="bg-warning text-white">Terrain Name</th>
+        <th class="bg-danger text-white">Price Per Hour</th>
+        <th class="bg-info text-white">Start Date</th>
+        <th class="bg-primary text-white">End Date</th>
+        <th class="bg-success text-white">Total Days</th>
+        <th class="bg-warning text-white">Total Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let rental of filteredRentals; let i = index" class="table-row">
+        <td class="bg-success text-white table-cell">{{ getUserEmail(rental.userId) }}</td>
+        <td class="bg-warning text-white table-cell">{{ rental.terrainName }}</td>
+        <td class="bg-danger text-white table-cell">{{ rental.pricePerHour }}</td>
+        <td class="bg-info text-white table-cell">{{ rental.startDate | date:'yyyy-MM-dd' }}</td>
+        <td class="bg-primary text-white table-cell">{{ rental.endDate | date:'yyyy-MM-dd' }}</td>
+        <td class="bg-success text-white table-cell">{{ rental.totalDays }}</td>
+        <td class="bg-warning text-white table-cell">{{ rental.totalPrice | currency:'RON' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ng-template #noRentals>
+  <p><em>No rentals match your search criteria.</em></p>
+</ng-template>
