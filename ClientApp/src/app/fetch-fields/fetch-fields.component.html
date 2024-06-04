@@ -54,7 +54,7 @@
               <strong>Terrain Name:</strong> {{ field.terrainName }}<br>
               <strong>Dimension:</strong> {{ field.dimension }}<br>
               <strong>Terrain Type:</strong> {{ field.terrainType }}<br>
-              <strong>Price:</strong> {{ field.price }}
+              <strong>Price:</strong> {{ field.price }} lei
             </p>
             <div class="action-cell">
               <button class="btn btn-success ml-2" *ngIf="isUserAuthenticated() && !(isAdmin$ | async)" (click)="toggleCalendar(field)">Rent</button>
